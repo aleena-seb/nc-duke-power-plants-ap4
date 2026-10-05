@@ -1,0 +1,12 @@
+unit_id,unit_name,site_name,county,county_fips,plant_type,capacity_mw
+1,Person CC 1,Person,Person,37145,CCGT,1360
+2,Person CC 2,Person,Person,37145,CCGT,1360
+3,Davie CC 4,Davie,Davie,37059,CCGT,1365
+4,Davie CC 5,Davie,Davie,37059,CCGT,1365
+5,Marshall CT 1,Marshall,Catawba,37035,CT,450
+6,Marshall CT 2,Marshall,Catawba,37035,CT,450
+7,Buck CT 3,Buck,Rowan,37159,CT,425
+8,Buck CT 4,Buck,Rowan,37159,CT,425
+9,Smith CT 5,Smith,Richmond,37153,CT,250
+10,Belews Creek CT 6,Belews Creek,Stokes,37169,CT,212.5
+11,Belews Creek CT 7,Belews Creek,Stokes,37169,CT,212.5
