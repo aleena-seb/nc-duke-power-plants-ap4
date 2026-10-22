@@ -5,6 +5,16 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 
+# Load local API keys if present
+keys_path <- here::here("R", "keys.R")
+if (file.exists(keys_path)) {
+  source(keys_path)
+  if (exists("CENSUS_API_KEY")) {
+    Sys.setenv(CENSUS_API_KEY = CENSUS_API_KEY)
+  }
+}
+
+
 ## setting filepaths to the folders
 ## "here" dictates from root folder of nc-duke...-ap4
 path_raw   <- here("data", "raw")
