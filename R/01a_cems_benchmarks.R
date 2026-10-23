@@ -105,9 +105,13 @@ gas_fleet <- fleet[
   gen_mwh > 0
 ]
 
-## tag ccgt vs ct
-gas_fleet[, tech := fifelse(grepl("combined", unit_type, ignore.case = TRUE), "ccgt", "ct")]
+## keep only combined cycle and combustion turbine units (drops steam boilers)
+gas_fleet <- gas_fleet[grepl("combined|combustion turbine", unit_type,
+                             ignore.case = TRUE)]
 
+## tag ccgt vs ct
+gas_fleet[, tech := fifelse(grepl("combined", unit_type, ignore.case = TRUE),
+                            "ccgt", "ct")]
 ## calculate emission rates at the unit level
 gas_fleet[, nox_lb_mwh := (nox_tons * 2000) / gen_mwh]
 gas_fleet[, so2_lb_mwh := (so2_tons * 2000) / gen_mwh]
@@ -117,14 +121,32 @@ ct_units <- gas_fleet[tech == "ct"]
 ct_units[, cf := gen_mwh / (capacity_mw * 8760)]
 ct_units <- ct_units[cf > 0 & cf <= 1]
 
-## calculate ccgt capacity factors at the facility level to avoid split steam turbine denominators
-ccgt_facility <- gas_fleet[tech == "ccgt", .(
-  tot_gen_mwh = sum(gen_mwh, na.rm = TRUE),
-  # Take unique unit capacity to avoid double counting
-  tot_cap_mw  = max(capacity_mw, na.rm = TRUE)
-), by = .(facility_id)]
+## build one row per generator listed in the "associated generators" text
+gen_long <- attrs[
+  !is.na(get(cap_attr_col)) & get(cap_attr_col) != "",
+  .(gen_text = trimws(unlist(strsplit(get(cap_attr_col), ",", fixed = TRUE)))),
+  by = .(facility_id = as.character(get(fac_attr_col)),
+         unit_id     = as.character(get(unit_attr_col)))
+]
+gen_long[, gen_id := trimws(sub("\\(.*$", "", gen_text))]   # e.g. "ST1"
+gen_long[, gen_mw := suppressWarnings(
+  as.numeric(sub(".*\\((.*)\\).*", "\\1", gen_text))        # e.g. 410
+)]
+gen_long <- gen_long[grepl("\\(", gen_text) & !is.na(gen_mw)]
 
-ccgt_facility[, cf := tot_gen_mwh / (tot_cap_mw * 8760)]
+## keep only generators tied to the CCGT units that ran, count each once
+ccgt_units <- unique(gas_fleet[tech == "ccgt", .(facility_id, unit_id)])
+fac_cap <- unique(
+  gen_long[ccgt_units, on = c("facility_id", "unit_id"), nomatch = NULL],
+  by = c("facility_id", "gen_id")
+)[, .(fac_cap_mw = sum(gen_mw)), by = facility_id]
+
+## facility generation and capacity factor
+ccgt_facility <- gas_fleet[tech == "ccgt", .(
+  tot_gen_mwh = sum(gen_mwh, na.rm = TRUE)
+), by = facility_id]
+ccgt_facility <- merge(ccgt_facility, fac_cap, by = "facility_id", all.x = TRUE)
+ccgt_facility[, cf := tot_gen_mwh / (fac_cap_mw * 8760)]
 ccgt_facility <- ccgt_facility[cf > 0 & cf <= 1]
 
 ## Grab quartiles and get percentage benchmarks for default attributes

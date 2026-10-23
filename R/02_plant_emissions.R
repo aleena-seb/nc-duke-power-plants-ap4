@@ -2,12 +2,10 @@
 ## Purpose: turn the 11 proposed units into annual tons of NOx and SO2,
 ## then collapse them into the 6 host counties.
 
-#install in case they weren't there
-install.packages(c("sf", "ggplot2"))
 ## 0. Load config --------------------------------------------------------------
 # Run 00_config.R (it sits at the project root, not in R/). This loads
 # libraries and creates path_raw, path_int, default_assumptions, nc_host_fips.
-source(here::here("00_config.R"))
+source(here::here("R", "00_config.R"))
 
 ## 1. Load inputs --------------------------------------------------------------
 # Read the unit roster from data/raw/ into a data.table called `units`.
