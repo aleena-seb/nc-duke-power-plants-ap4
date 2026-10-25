@@ -30,8 +30,7 @@ cpi_2026          <- 334.4
 cpi_inflator      <- cpi_2026 / ap4_base_cpi_2017
 
 ## load empirical CEMS benchmarks from Step 01a (fallback to defaults if missing)
-bench_file <- here(path_int, "cems_benchmarks.rds")
-
+bench_file <- file.path(path_int, "cems_benchmarks.rds")
 if (file.exists(bench_file)) {
   cems_b <- readRDS(bench_file)
   
