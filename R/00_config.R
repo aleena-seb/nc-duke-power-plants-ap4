@@ -33,6 +33,9 @@ cpi_inflator      <- cpi_2026 / ap4_base_cpi_2017
 bench_file <- file.path(path_int, "cems_benchmarks.rds")
 if (file.exists(bench_file)) {
   cems_b <- readRDS(bench_file)
+  cat("\n--- Calculated CEMS Benchmarks ---\n")
+
+print(cems_b)
   
   default_assumptions <- list(
     ct = list(

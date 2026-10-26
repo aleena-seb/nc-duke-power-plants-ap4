@@ -47,7 +47,7 @@ get_param <- function(tech, param, assumptions) {
 units[, `:=`(
   cf         = get_param(tech, "capacity_factor", default_assumptions),
   nox_lb_mwh = get_param(tech, "nox_lb_mwh", default_assumptions),
-  so2_lb_mwh = get_param(tech, "so2_lb_mwh", default_assumptions)
+  so2_lb_mwh = get_param(tech, "so2_lb_mwh", cems_b)
 )]
 
 ## 3. Annual generation and pollutant mass -------------------------------------
