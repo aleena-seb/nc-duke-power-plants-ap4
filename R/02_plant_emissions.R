@@ -45,7 +45,7 @@ get_param <- function(tech, param, assumptions) {
 
 # add three columns: capacity factor, NOx rate, and SO2 rate (lb/MWh).
 units[, `:=`(
-  cf         = get_param(tech, "cf", default_assumptions),
+  cf         = get_param(tech, "capacity_factor", default_assumptions),
   nox_lb_mwh = get_param(tech, "nox_lb_mwh", default_assumptions),
   so2_lb_mwh = get_param(tech, "so2_lb_mwh", cems_b)
 )]
