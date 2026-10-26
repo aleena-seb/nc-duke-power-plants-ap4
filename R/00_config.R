@@ -34,6 +34,9 @@ bench_file <- here(path_int, "cems_benchmarks.rds")
 
 if (file.exists(bench_file)) {
   cems_b <- readRDS(bench_file)
+  cat("\n--- Calculated CEMS Benchmarks ---\n")
+
+print(cems_b)
   
   default_assumptions <- list(
     ct = list(
