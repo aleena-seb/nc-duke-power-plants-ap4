@@ -1,0 +1,11 @@
+{
+  "ap4_handoff": "data/processed/ap4_nc/nc_demographic_regression_handoff.csv",
+  "acs_demographics": "data/intermediate/nc_county_demographics.csv",
+  "output": "data/processed/ap4_nc/nc_ap4_demographics_analysis.csv",
+  "county_count": 100,
+  "total_mortality_damage_2026_usd_provisional": 2562330.64,
+  "join_key": "receptor_fips",
+  "population_source": "2020-2024 ACS 5-year county estimates",
+  "caution": "County-level descriptive associations do not imply causation. The 2026 dollar values are provisional."
+}
+
