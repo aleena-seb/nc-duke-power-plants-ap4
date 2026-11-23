@@ -7,9 +7,9 @@ R/keys.R
 
 
 # Ignore all files in data directories
-#data/raw/*
-#data/intermediate/*
-#data/final/*
+data/raw/*
+data/intermediate/*
+data/final/*
 
 # Keep directory structures tracked
 !data/raw/.gitkeep

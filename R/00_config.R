@@ -75,4 +75,12 @@ nc_host_fips <- c(
   "Stokes"   = "37169"
 )
 
+## Proposed Davie County generating facility coordinates
+## WGS84 decimal degrees (EPSG:4326)
+## User-selected modeling location; not verified stack coordinates
+
+davie_lat <- 35.84273333
+davie_lon <- -80.41536111
+davie_fips <- "37059"
+
 message("00_config.R loaded successfully.")
