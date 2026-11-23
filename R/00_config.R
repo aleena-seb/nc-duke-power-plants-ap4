@@ -30,8 +30,7 @@ cpi_2026          <- 334.4
 cpi_inflator      <- cpi_2026 / ap4_base_cpi_2017
 
 ## load empirical CEMS benchmarks from Step 01a (fallback to defaults if missing)
-bench_file <- here(path_int, "cems_benchmarks.rds")
-
+bench_file <- file.path(path_int, "cems_benchmarks.rds")
 if (file.exists(bench_file)) {
   cems_b <- readRDS(bench_file)
   cat("\n--- Calculated CEMS Benchmarks ---\n")
@@ -75,5 +74,13 @@ nc_host_fips <- c(
   "Richmond" = "37153",
   "Stokes"   = "37169"
 )
+
+## Proposed Davie County generating facility coordinates
+## WGS84 decimal degrees (EPSG:4326)
+## User-selected modeling location; not verified stack coordinates
+
+davie_lat <- 35.84273333
+davie_lon <- -80.41536111
+davie_fips <- "37059"
 
 message("00_config.R loaded successfully.")

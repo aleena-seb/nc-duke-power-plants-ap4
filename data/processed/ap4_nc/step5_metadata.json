@@ -1,0 +1,16 @@
+{
+  "generated_date": "2026-11-21",
+  "input_file": "data/intermediate/ap4_nc/ap4_nc_scenario_results_2020usd.csv",
+  "total_rows": 900,
+  "nc_counties": 100,
+  "scenario_count": 9,
+  "primary_outcome": "combined 11-unit mortality damages by NC receptor county",
+  "cpi_2020_annual": 258.811,
+  "cpi_2026_jan_oct_mean": 332.7694,
+  "usd2020_to_usd2026_provisional_factor": 1.2857621971245428,
+  "cpi_source": "https://www.bls.gov/regions/mid-atlantic/data/consumerpriceindexhistorical_us_table.htm",
+  "valuation_warning": "2026 conversion uses Jan-Oct 2026 CPI-U average (latest available at preparation), not final calendar-year 2026 CPI. Base AP4 value is labeled 2020 USD in MATLAB output.",
+  "model_warning": "AP4 chemistry is nonlinear; standalone sites and NOx/SO2 scenarios cannot be summed to reproduce combined damages. Historical 2017 AP4 exposures/population/mortality plus 2024 emissions benchmarks. Davie uses a county non-EGU point-source proxy; five other sites use historical EGU source-row approximations. No updated 2024 population or facility-specific stack geometry is modeled.",
+  "geography_warning": "Receptors are limited to NC; damages outside NC excluded.",
+  "regression_guidance": "Join by receptor_fips as a 5-character string. Use combined damages as primary dependent variable. Do not add standalone site columns."
+}
